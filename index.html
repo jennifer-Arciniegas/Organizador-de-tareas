@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <title>Organizador</title>
+</head>
+<body>
+    <main>
+        <nav class="flex justify-between m-2 p-2">
+           <div>
+            logo
+           </div>
+            <div class="flex justify-end gap-6 m-2 p-2">
+                <button>Iniciar sesion</button>
+                <button id="registrarUser">Registrarse</button>
+
+            </div>
+           
+        </nav>
+        <section>
+            <button class="bg-indigo-200 m-3 p-2 rounded-lg hover:bg-indigo-300" id="newTarea">Tarea Nueva</button>
+            <div id="espacioNewTarea">
+               
+
+            </div>
+        </section>
+        <section class="flex justify-evenly ">
+            <div class="bg-sky-200 w-80 rounded-lg flex justify-center">pendiente
+                <div id="espacioPendiente">
+
+                </div>
+            </div>
+            <div class="bg-green-200 w-80 rounded-lg flex justify-center">en proceso
+                <div id="espacioProceso">
+
+                </div>
+            </div>
+            <div class="bg-rose-200 w-80 rounded-lg flex justify-center"> terminadas
+                <div id="espacioTerminadas">
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div class="bg-indigo-200 flex justify-center w-100 h-60 rounded-lg p-4 hidden" id="formularioRegistro">
+        <form action="">
+            <label for="nombre">Nombre</label>
+            <input type="text" name="nombre" id="nombre" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
+            <br>
+            <label for="apellido">Apellido</label>
+            <input type="text" name="apellido" id="apellido" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
+            <br>
+            <label for="correo">Correo electronico</label>
+            <input type="email" name="correo" id="correo" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
+            <br>
+            <label for="contraseña">Contraseña</label>
+            <input type="password" name="contraseña" id="contraseña" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
+            <br>
+            <div class="flex justify-center">
+                <button class="bg-blue-300 hover:bg-blue-500 p-1 m-1 rounded-lg">Registrar</button>
+            </div>
+            
+        </form>
+    </div>
+</body>
+<script type="module" src="./script/app.js">
+
+</script>
+</html>
