@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="formNewTarea">
+      <h1 class="text-xl font-bold text-center mb-4">Nueva Tarea</h1>
+      <div class="grid grid-cols-2 gap-6">
+        <div>
+          <label for="title" class="block mb-2">Título:</label>
+          <input
+            type="text"
+            name="title"
+            id="title"
+            required
+            class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+        </div>
+        <div>
+          <label for="description" class="block mt-4 mb-2">Descripción:</label>
+          <input
+            type="text"
+            name="description"
+            id="description"
+            required
+            class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          />
+        </div>
+      </div>
+      <label for="imagen" class="block mt-4 mb-2">Imagen (URL):</label>
+      <input
+        type="text"
+        name="imagen"
+        id="imagen"
+        placeholder="URL"
+        class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      />
+      <div class="grid grid-cols-2 gap-6">
+        <div> 
+            <label for="fInicio" class="block mt-4 mb-2">Fecha de inicio:</label>
+      <input
+        type="date"
+        name="fInicio"
+        id="fInicio"
+        required
+        class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      />
+        </div>
+        <div>
+             <label for="fFin" class="block mt-4 mb-2">Fecha límite:</label>
+      <input
+        type="date"
+        name="fFin"
+        id="fFin"
+        required
+        class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      />
+        </div>
+      </div>
+      
+     
+      <label for="estadoTarea" class="block mt-4 mb-2">Estado:</label>
+      <select
+        name="estadoTarea"
+        id="estadoTarea"
+        required
+        class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400"
+      >
+        <option value="pendiente">Pendiente</option>
+        <option value="proceso">En proceso</option>
+        <option value="terminada">Finalizada</option>
+      </select>
+      <div class="flex justify-center mt-6 gap-4">
+        <button
+          type="submit"
+          class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600"
+        >
+          Enviar
+        </button>
+        <button
+          type="button"
+          id="cancelarTarea"
+          class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600"
+        >
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </body>
+</html>

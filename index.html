@@ -3,70 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
-    <title>Organizador</title>
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Organizador de Tareas</title>
 </head>
-<body>
-    <main>
-        <nav class="flex justify-between m-2 p-2">
-           <div>
-            logo
-           </div>
-            <div class="flex justify-end gap-6 m-2 p-2">
-                <button>Iniciar sesion</button>
-                <button id="registrarUser">Registrarse</button>
-
+<body class="bg-gray-100 font-sans">
+    <main class="container ">
+        <nav class="flex justify-between items-center w-screen  w-full p-4 bg-white rounded-lg shadow">
+            <div class="text-2xl font-bold text-indigo-600">Organizador de Tareas</div>
+            <div id="authButtons" class="flex gap-4">
+                <button id="iniciarSesion" class="bg-indigo-500 text-white px-4 py-2 rounded-lg hover:bg-indigo-600">Iniciar Sesión</button>
+                <button id="registrarUser" class="bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600">Registrarse</button>
+                <button id="cerrarSesion" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 hidden">Cerrar Sesión</button>
             </div>
-           
         </nav>
-        <section>
-            <button class="bg-indigo-200 m-3 p-2 rounded-lg hover:bg-indigo-300" id="newTarea">Tarea Nueva</button>
-            <div id="espacioNewTarea">
-               
 
-            </div>
+        <!-- Notification Toast -->
+        <div id="notification" class="fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg hidden">
+            ¡Usuario creado exitosamente!
+        </div>
+
+        <!-- Login Form -->
+        <section id="loginForm" class="bg-white max-w-md mx-auto mt-6 rounded-lg p-6 shadow-lg hidden">
+            <form id="formLogin">
+                <h2 class="text-xl font-bold text-center mb-4">Iniciar Sesión</h2>
+                <label for="usernameLogin" class="block mb-2">Usuario</label>
+                <input type="text" id="usernameLogin" required class="w-full p-2 rounded-lg bg-gray-100 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <label for="contraseñaLogin" class="block mt-4 mb-2">Contraseña</label>
+                <input type="password" id="contraseñaLogin" required class="w-full p-2 rounded-lg bg-gray-100 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <div class="flex justify-center mt-6">
+                    <button type="submit" class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600">Iniciar Sesión</button>
+                </div>
+            </form>
         </section>
-        <section class="flex justify-evenly ">
-            <div class="bg-sky-200 w-80 rounded-lg flex justify-center">pendiente
-                <div id="espacioPendiente">
 
+        <!-- Register Form -->
+        <section id="registerForm" class="bg-indigo-100 max-w-md mx-auto mt-6 rounded-lg p-6DON'T USE FORM HERE shadow-lg hidden">
+            <form id="formRegister">
+                <h2 class="text-xl font-bold text-center mb-4">Registrarse</h2>
+                <label for="nombre" class="block mb-2">Nombre</label>
+                <input type="text" id="nombre" required class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <label for="edad" class="block mt-4 mb-2">Edad</label>
+                <input type="number" id="edad" required min="1" class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <label for="username" class="block mt-4 mb-2">Usuario</label>
+                <input type="text" id="username" required class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <label for="contraseña" class="block mt-4 mb-2">Contraseña</label>
+                <input type="password" id="contraseña" required class="w-full p-2 rounded-lg bg-gray-200 hover:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-400">
+                <div class="flex justify-center mt-6">
+                    <button type="submit" class="bg-indigo-500 text-white px-6 py-2 rounded-lg hover:bg-indigo-600">Registrarse</button>
                 </div>
-            </div>
-            <div class="bg-green-200 w-80 rounded-lg flex justify-center">en proceso
-                <div id="espacioProceso">
+            </form>
+        </section>
 
+        <!-- Task Section -->
+        <section id="taskSection" class="mt-6 hidden">
+            <button id="newTarea" class="bg-indigo-500 text-white   px-4 py-2 rounded-lg hover:bg-indigo-600 mb-2 m-6">Nueva Tarea</button>
+            <div id="espacioNewTarea" class="mb-6"></div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 m-8">
+                <div class="bg-sky-200 rounded-lg p-4 shadow" id="pendiente" ondragover="event.preventDefault()" ondrop="drop(event, 'pendiente')">
+                    <h2 class="text-lg font-bold text-center mb-2">Pendiente</h2>
+                    <hr>
+                    <div id="espacioPendiente"></div>
                 </div>
-            </div>
-            <div class="bg-rose-200 w-80 rounded-lg flex justify-center"> terminadas
-                <div id="espacioTerminadas">
-
+                <div class="bg-green-200 rounded-lg p-4 shadow" id="proceso" ondragover="event.preventDefault()" ondrop="drop(event, 'proceso')">
+                    <h2 class="text-lg font-bold text-center mb-2">En Proceso</h2>
+                    <hr>
+                    <div id="espacioProceso"></div>
+                </div>
+                <div class="bg-rose-200 rounded-lg p-4 shadow" id="terminada" ondragover="event.preventDefault()" ondrop="drop(event, 'terminada')">
+                    <h2 class="text-lg font-bold text-center mb-2">Terminadas</h2>
+                    <hr>
+                    <div id="espacioTerminadas" ></div>
                 </div>
             </div>
         </section>
     </main>
-
-    <div class="bg-indigo-200 flex justify-center w-100 h-60 rounded-lg p-4 hidden" id="formularioRegistro">
-        <form action="">
-            <label for="nombre">Nombre</label>
-            <input type="text" name="nombre" id="nombre" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
-            <br>
-            <label for="apellido">Apellido</label>
-            <input type="text" name="apellido" id="apellido" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
-            <br>
-            <label for="correo">Correo electronico</label>
-            <input type="email" name="correo" id="correo" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
-            <br>
-            <label for="contraseña">Contraseña</label>
-            <input type="password" name="contraseña" id="contraseña" required class="bg-gray-100 rounded-lg p-1 m-1 hover:bg-white  ">
-            <br>
-            <div class="flex justify-center">
-                <button class="bg-blue-300 hover:bg-blue-500 p-1 m-1 rounded-lg">Registrar</button>
-            </div>
-            
-        </form>
-    </div>
+    <script type="module" src="./src/script/app.js"></script>
 </body>
-<script type="module" src="./script/app.js">
-
-</script>
 </html>
