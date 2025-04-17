@@ -2,12 +2,12 @@ import { bRegistroTarea } from "./registro.js";
 import { userRegister, userLogin, logout } from "./userRegister.js";
 
 const bNuevaTarea = document.getElementById("newTarea");
-const espacioNuevatarea = document.getElementById("espacioNewTarea");
+const taskModal = document.getElementById("taskModal");
 const registerUser = document.getElementById("registrarUser");
 const iniciarSesion = document.getElementById("iniciarSesion");
 const cerrarSesion = document.getElementById("cerrarSesion");
-const loginForm = document.getElementById("loginForm");
-const registerForm = document.getElementById("registerForm");
+const loginModal = document.getElementById("loginModal");
+const registerModal = document.getElementById("registerModal");
 const taskSection = document.getElementById("taskSection");
 const notification = document.getElementById("notification");
 
@@ -16,6 +16,12 @@ function showNotification() {
   setTimeout(() => {
     notification.classList.add("hidden");
   }, 3000);
+}
+
+function closeAllModals() {
+  taskModal.classList.add("hidden");
+  loginModal.classList.add("hidden");
+  registerModal.classList.add("hidden");
 }
 
 function checkLoginStatus() {
@@ -35,21 +41,23 @@ function checkLoginStatus() {
 }
 
 bNuevaTarea.addEventListener("click", () => {
-  bRegistroTarea(espacioNuevatarea);
+  closeAllModals();
+  bRegistroTarea(taskModal);
 });
 
 registerUser.addEventListener("click", () => {
-  registerForm.classList.remove("hidden");
-  loginForm.classList.add("hidden");
+  closeAllModals();
+  registerModal.classList.remove("hidden");
 });
 
 iniciarSesion.addEventListener("click", () => {
-  loginForm.classList.remove("hidden");
-  registerForm.classList.add("hidden");
+  closeAllModals();
+  loginModal.classList.remove("hidden");
 });
 
 cerrarSesion.addEventListener("click", () => {
   logout();
+  closeAllModals();
   checkLoginStatus();
 });
 
@@ -60,8 +68,12 @@ document.getElementById("formRegister").addEventListener("submit", (event) => {
   const username = document.getElementById("username").value;
   const contraseña = document.getElementById("contraseña").value;
   userRegister({ nombre, edad, username, contraseña }, showNotification);
-  registerForm.classList.add("hidden");
+  registerModal.classList.add("hidden");
   checkLoginStatus();
+});
+
+document.getElementById("cancelarRegister").addEventListener("click", () => {
+  registerModal.classList.add("hidden");
 });
 
 document.getElementById("formLogin").addEventListener("submit", (event) => {
@@ -69,8 +81,12 @@ document.getElementById("formLogin").addEventListener("submit", (event) => {
   const username = document.getElementById("usernameLogin").value;
   const contraseña = document.getElementById("contraseñaLogin").value;
   userLogin(username, contraseña);
-  loginForm.classList.add("hidden");
+  loginModal.classList.add("hidden");
   checkLoginStatus();
+});
+
+document.getElementById("cancelarLogin").addEventListener("click", () => {
+  loginModal.classList.add("hidden");
 });
 
 function renderTasks() {
